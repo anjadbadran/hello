@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+    <title>Contact List App</title>
+</head>
+<body>
+
+
+
+<!--<script>-->
+
+<!--window.fbAsyncInit = function () {-->
+<!--FB.init({-->
+<!--appId: '664326973750028',-->
+<!--status: true,-->
+<!--cookie: true,-->
+<!--xfbml: true-->
+<!--});-->
+<!--};-->
+
+<!--(function (doc) {-->
+<!--var js;-->
+<!--var id = 'facebook-jssdk';-->
+<!--var ref = doc.getElementsByTagName('script')[0];-->
+<!--if (doc.getElementById(id)) {-->
+<!--return;-->
+<!--}-->
+<!--js = doc.createElement('script');-->
+<!--js.id = id;-->
+<!--js.async = true;-->
+<!--js.src = "//connect.facebook.net/en_US/all.js";-->
+<!--ref.parentNode.insertBefore(js, ref);-->
+<!--}(document));-->
+
+
+<!--FB.Event.subscribe('auth.authResponseChange', function (response) {-->
+<!--if (response.status === 'connected') {-->
+<!--alert("Successfully connected to Facebook!");-->
+<!--}-->
+<!--else if (response.status === 'not_authorized') {-->
+<!--alert("Login failed!");-->
+<!--} else {-->
+<!--alert("Unknown error!");-->
+<!--}-->
+<!--});-->
+
+<!--function Login() {-->
+<!--FB.login(function (response) {-->
+
+<!--}, { scope: 'email,user_photos,publish_actions' });-->
+<!--}-->
+
+
+<!--</script>-->
+
+<div class="container" ng-controller="AppCtrl">
+    <div class="col-xs-12 jumbotron">
+        <h1>Welcome!</h1>
+
+
+
+
+
+        <form class="form-inline">
+            <div class="form-group">
+
+                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+            </div>
+        </form>
+    </div>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+
+
+            <th ng-click="sort('name')"> Name
+                <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+
+            <th ng-click="sort('email')"> Email
+                <span class="glyphicon sort-icon" ng-show="sortKey=='email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+
+            <th ng-click="sort('phone')">Phone#
+                <span class="glyphicon sort-icon" ng-show="sortKey=='phone'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+
+
+
+
+            <td><input class="form-csontrol" ng-model="contact.name"></td>
+            <td><input class="form-control" ng-model="contact.email"></td>
+            <td><input class="form-control" ng-model="contact.phone"></td>
+            <td><button class="btn btn-primary" ng-click="addContact()">Add Contact</button></td>
+            <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;
+                <button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+        </tr>
+
+        <tr dir-paginate="contact in contactlist | orderBy:sortKey:reverse|filter:search | itemsPerPage: 5">
+
+            <td><a href="/profile.html" >{{contact.name}}</a></td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.phone}}</td>
+            <td><button class="btn btn-danger" ng-click="remove(contact._id)">Remove</button></td>
+            <td><button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button></td>
+        </tr>
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+</div>
+
+
+<div align="center">
+
+    <dir-pagination-controls>
+        max-size="5"
+        direction-links="true"
+        boundary-links="true">
+    </dir-pagination-controls>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>@anjad badran, 2017</p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</footer>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+<script src="controllers/controller.js"></script>
+<script src="controllers/dirPagination.js"></script>
+
+
+
+
+
+</body>
+
+
+
+</html>

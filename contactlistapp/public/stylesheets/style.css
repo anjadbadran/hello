@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+background-color:#f9f2f4;
+}
+
+.jumbotron {
+    text-align:center;
+    background-image: url('../fl.jpg');
+
+}
+
+footer {
+
+    bottom: 100px;
+    width: 100%;
+    text-align: center;
+}

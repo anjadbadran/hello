@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <title>Facebook Login JavaScript Example</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    // This is called with the results from from FB.getLoginStatus().
+    function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        if (response.status === 'connected') {
+            // Logged into your app and Facebook.
+            testAPI();
+        } else if (response.status === 'not_authorized') {
+            // The person is logged into Facebook, but not your app.
+            document.getElementById('status').innerHTML = 'Please log ' +
+                'into this app.';
+        } else {
+            document.getElementById('status').innerHTML = 'Please log ' +
+                'into Facebook.';
+        }
+    }
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '664326973750028',
+            cookie     : true,
+
+            xfbml      : true,
+            version    : 'v2.8'
+        });
+
+
+
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+
+    };
+
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', {fields: 'id,name,email,gender,birthday,location,hometown,picture.width(150).height(150)'},function(response) {
+            console.log('Successful login for: ' + response.name);
+
+            document.getElementById('status').innerHTML = "<img   src='" + response.picture.data.url + "' align='left' style='width: 200px'>"
+                + 'Name:' +'&nbsp;'+response.name + '</p>'
+                + 'Emaile:' +'&nbsp;'+  response.email +'</p>'
+                + 'Gender:' +'&nbsp;'+  response.gender  + '</p>'
+                +'Birthday:' +'&nbsp;'+  response.birthday+ '</p>'
+                +'Country:' +'&nbsp;'+   response.hometown.name+ '</p>'
+                + 'Hometown:'+'&nbsp;'+  response.location.name;
+        });
+    }
+</script>
+
+
+
+<div class="fb-login-button" data-scope="email,user_birthday,user_hometown,user_location,user_website,user_work_history,user_at_mebou
+" ></div>
+
+
+<!--<div id="status">-->
+<!--</div>-->
+
+
+<div class="container" ng-controller="AppCtrl">
+  <div class="col-xs-12 jumbotron">
+    <h1>Facebook profile</h1>
+
+
+
+
+
+
+  </div>
+
+
+  <div  id="status" ></div>
+
+
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<footer background-color="red">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>@anjad badran, 2017</p>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</footer>
+
+
+
+</body>
+</html>
